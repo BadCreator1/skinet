@@ -10,3 +10,17 @@
     right: -15px;
     text-align: center;
 }
+a{
+    color:#343a40;
+
+    &.active{
+        color: orange;
+    }
+}
+.logo{
+    max-height: 70px;
+    cursor: pointer;
+    &:focus{
+        outline: none;
+    }
+}
