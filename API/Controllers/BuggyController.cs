@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Errors;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -17,26 +18,37 @@ namespace API.Controllers
         }
 
         [HttpGet("notfound")]
-        public ActionResult GetNotFoundReguest(){
+        public ActionResult GetNotFoundReguest()
+        {
             var thing = _context.Products.Find(42);
-            if(thing == null){
+            if (thing == null)
+            {
                 return NotFound(new ApiResponse(404));
             }
             return Ok();
         }
         [HttpGet("servererror")]
-        public ActionResult GetServerError(){
+        public ActionResult GetServerError()
+        {
             var thing = _context.Products.Find(42);
             var thingToReturn = thing.ToString();
             return Ok();
         }
         [HttpGet("badreguest")]
-        public ActionResult GetBadrequest(){
+        public ActionResult GetBadrequest()
+        {
             return BadRequest(new ApiResponse(400));
         }
         [HttpGet("badreguest/{id}")]
-        public ActionResult GetBadrequest(int id){
+        public ActionResult GetBadrequest(int id)
+        {
             return Ok();
+        }
+        [HttpGet("testauth")]
+        [Authorize]
+        public ActionResult<string> GetSecretText()
+        {
+            return "secret stuff";
         }
     }
 }
