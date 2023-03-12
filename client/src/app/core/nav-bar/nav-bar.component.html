@@ -11,9 +11,9 @@
         <li><a routerLink="/test-error" routerLinkActive="active" class="nav-link px-2">Errors</a></li>
     </ul>
     <div class="d-flex col-md-3 justify-content-end align-items-center">
-        <a class="position-relative me-4">
+        <a class="position-relative me-4" routerLink="/basket">
             <i class="fa fa-shopping-cart fa-2x text-dark"></i>
-            <div class="cart-no">5</div>
+            <div class="cart-no" *ngIf="(basket$ | async)  as basket">{{basket?.items?.length}}</div>
         </a>
         <button type="button" class="btn btn-outline-primary me-3">Login</button>
         <button type="button" class="btn btn-primary me-3">Sign-up</button>
