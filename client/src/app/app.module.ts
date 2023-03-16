@@ -12,6 +12,7 @@ import { NavBarComponent } from './core/nav-bar/nav-bar.component';
 import { SectionHeaderComponent } from './core/section-header/section-header.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,13 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
   provide: HTTP_INTERCEPTORS, 
   useClass: LoadingInterceptor,
   multi: true
+}
+,{
+  provide: HTTP_INTERCEPTORS, 
+  useClass: JwtInterceptor,
+  multi: true
 }],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

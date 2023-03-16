@@ -2,11 +2,10 @@
     class="d-flex flex-wrap align-items-center bg-light justify-content-center justify-content-md-between py-3 mb-4 border-bottom fixed-top">
     <img src="/assets/images/logo.png" alt="logo" class="logo" routerLink="/">
 
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 text-uppercase" 
-    style="font-size: larger;">
-        <li><a [routerLink]="['/']" class="nav-link px-2" routerLinkActive="active" 
-            [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-        <li><a href="#" routerLink="/shop"  class="nav-link px-2" routerLinkActive="active">Shop</a></li>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 text-uppercase" style="font-size: larger;">
+        <li><a [routerLink]="['/']" class="nav-link px-2" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+        <li><a href="#" routerLink="/shop" class="nav-link px-2" routerLinkActive="active">Shop</a></li>
         <li><a href="#" class="nav-link px-2">Contact</a></li>
         <li><a routerLink="/test-error" routerLinkActive="active" class="nav-link px-2">Errors</a></li>
     </ul>
@@ -15,7 +14,31 @@
             <i class="fa fa-shopping-cart fa-2x text-dark"></i>
             <div class="cart-no" *ngIf="(basket$ | async)  as basket">{{basket?.items?.length}}</div>
         </a>
-        <button type="button" class="btn btn-outline-primary me-3">Login</button>
-        <button type="button" class="btn btn-primary me-3">Sign-up</button>
+        <ng-container *ngIf="(currentUser$ | async)===null">
+            <a routerLink="/account/login" type="button" class="btn btn-outline-primary me-3">Login</a>
+            <a routerLink="/account/register" type="button" class="btn btn-primary me-3">Sign-up</a>
+        </ng-container>
+        <ng-container *ngIf="currentUser$ | async">
+            <div class="dropdown ms-3 mr-5" dropdown>
+                <a class="dropdown-toggle" style="cursor: pointer" href="#" dropdownToggle>
+                    <strong>Welcome</strong> {{(currentUser$ | async)?.displayName }}</a>
+                <div *dropdownMenu class="dropdown-menu dropdown-menu-right" style="cursor: pointer">
+                    <a routerLink="/basket" class="dropdown-item d-flex align-items-center py-2">
+                        <i class="fa fa-shopping-cart me-3"></i>View Basket
+                    </a>
+                    <a routerLink="/order" class="dropdown-item d-flex align-items-center py-2">
+                        <i class="fa fa-history me-3"></i>View Orders
+                    </a>
+
+                    <div class="dropdown divider"></div>
+                    <a (click)="logout()" class="dropdown-item d-flex align-items-center py-2">
+                        <i class="fa fa-sign-out me-3"></i>Logout
+                    </a>
+
+
+                </div>
+            </div>
+        </ng-container>
+
     </div>
 </div>
