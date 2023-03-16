@@ -36,7 +36,7 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
 builder.Services.AddApplicationServices();
 builder.Services.AddIdentityServices(_config);
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerDocumentation();
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("CorsPolicy", policy =>
