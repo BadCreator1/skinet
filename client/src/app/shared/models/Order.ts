@@ -17,6 +17,8 @@ export interface OrderItem {
     itemOrdered: ItemOrdered;
     price: number;
     quantity: number;
+    productName: string;
+    pictureUrl: string;
 }
 
 export interface IOrder {
@@ -28,5 +30,7 @@ export interface IOrder {
     orderItems: OrderItem[];
     subtotal: number;
     status: number;
+    shippingPrice: number;
     paymentIntentId: string;
+    total: number;
 }

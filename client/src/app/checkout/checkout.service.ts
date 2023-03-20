@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { IDeliveryMethod } from '../shared/models/deliveryMethod';
-import { IOrder, IOrderToCreate } from '../shared/models/Order';
+import { IOrder, IOrderToCreate } from '../shared/models/order';
 
 @Injectable({
   providedIn: 'root'
